@@ -8,10 +8,10 @@ function customRegistrationNumber(number) {
   // 1. 주민등록번호 유효성 검사
   if (checkRegiNumberLength(number)) {
     if (checkRegistrationNumber(number)) {
+      // 2. 주민등록번호 데이터 가공
       console.log(getRegistrationNumber(number));
     }
   }
-  // 2. 주민등록번호 데이터 가공
 }
 
 customRegistrationNumber("210510-1010101");
