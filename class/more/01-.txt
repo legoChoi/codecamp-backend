@@ -1,0 +1,28 @@
+게시글 예시
+데이터 (작성자, 번호, 제목, 작성일, 좋아요 등)
+
+Rest API는 게시글에 대한 모든 데이터를 다 가져옴 => 데이터 낭비, 비용
+GRAPHQL은 특정 데이터만 골라서 받아오기 가능
+
+요청과 응답에는 헤더가 붙음
+헤더 : sender, receiver
+바디 : 실제 전송하려는 데이터
+
+
+CRUD
+생성 : CREATE
+조회 : READ
+수정 : UPDATE
+삭제 : DELETE
+
+axios(rest-API)
+생성 : CREATE -> POST
+수정 : UPDATE -> PUT
+삭제 : DELETE -> DELETE
+조회 : READ -> GET
+
+apollo-client(graphql-API)
+생성 : CREATE -> MUTATION
+수정 : UPDATE -> MUTATION
+삭제 : DELETE -> MUTATION
+조회 : READ -> QUERY
