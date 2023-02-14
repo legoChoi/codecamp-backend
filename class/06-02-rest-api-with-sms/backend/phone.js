@@ -29,17 +29,16 @@ export function getToken(count) {
 }
 
 export async function sendTokenToSMS(fff, ggg) {
-  // NCSI0SLP2OXUQYGX : KEY
-  // RJQQVEXRXDDUYPOADBAY119VL8ED2SKD : SECRET
+  const SMS_KEY = process.env.SMS_KEY;
+  const SMS_SECRET = process.env.SMS_SECRET;
+  const SMS_SENDER = process.env.SMS_SENDER;
+
   const mySMS = coolsms.default;
-  const messageService = new mySMS(
-    "NCSI0SLP2OXUQYGX",
-    "RJQQVEXRXDDUYPOADBAY119VL8ED2SKD"
-  );
+  const messageService = new mySMS(SMS_KEY, SMS_SECRET);
 
   const result = await messageService.sendOne({
     to: fff,
-    from: "01051275208",
+    from: SMS_SENDER,
     text: `[코드캠프-테스트] 인증 번호는 [${ggg}] 입니다.`,
   });
 
