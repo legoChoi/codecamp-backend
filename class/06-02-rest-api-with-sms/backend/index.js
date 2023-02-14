@@ -51,16 +51,17 @@ app.post("/boards", (req, res) => {
 });
 
 app.post("/tokens/phone", (req, res) => {
-  const myPhone = req.body;
+  const myPhone = req.body.aaa;
+  console.log(myPhone);
 
   // 1. 휴대폰번호 자릿수 맞는지 확인하기
-  const isValid = pFunction.checkValidationPhone(myPhone.ccc);
+  const isValid = pFunction.checkValidationPhone(myPhone);
   if (isValid) {
     // 2. 핸드폰 토큰 6자리 만들기
     const mytoken = pFunction.getToken(6);
 
     // 3. 핸드폰번호에 토큰 전송하기
-    pFunction.sendTokenToSMS(myPhone.ccc, mytoken);
+    pFunction.sendTokenToSMS(myPhone, mytoken);
 
     res.send("인증 완료");
   }

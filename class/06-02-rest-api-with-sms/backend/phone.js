@@ -1,3 +1,5 @@
+import coolsms from "coolsms-node-sdk";
+
 export function checkValidationPhone(myphone) {
   if (myphone.length !== 10 && myphone.length !== 11) {
     console.log("에러 발생!!! 핸드폰 번호를 제대로 입력해 주세요!!!");
@@ -26,6 +28,21 @@ export function getToken(count) {
   // console.log(result)
 }
 
-export function sendTokenToSMS(fff, ggg) {
-  console.log(fff + "번호로 인증번호" + ggg + "를 전송합니다!!");
+export async function sendTokenToSMS(fff, ggg) {
+  // NCSI0SLP2OXUQYGX : KEY
+  // RJQQVEXRXDDUYPOADBAY119VL8ED2SKD : SECRET
+  const mySMS = coolsms.default;
+  const messageService = new mySMS(
+    "NCSI0SLP2OXUQYGX",
+    "RJQQVEXRXDDUYPOADBAY119VL8ED2SKD"
+  );
+
+  const result = await messageService.sendOne({
+    to: fff,
+    from: "01051275208",
+    text: `[코드캠프-테스트] 인증 번호는 [${ggg}] 입니다.`,
+  });
+
+  console.log(result);
+  // console.log(fff + "번호로 인증번호" + ggg + "를 전송합니다!!");
 }
