@@ -1,3 +1,4 @@
+import { checkValidationPhone, getToken, sendTokenToSMS } from "./phone.js";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
@@ -25,6 +26,7 @@ const typeDefs = `#graphql
   type Mutation {
     createBoard(writer: String, title: String, contents: String): String
     createBoard2(createBoardInput: CreateBoardInput): String
+    createTokenOfPhone(myphone: String): String
   }
 `;
 
@@ -78,6 +80,23 @@ const resolvers = {
 
       // 2. 저장결과 알려주기.
       return "등록에 성공하였습니다.";
+    },
+    createTokenOfPhone: (_, args) => {
+      // 1. 휴대폰번호 자릿수 맞는지 확인하기
+      const isValid = checkValidationPhone(args);
+      console.log(args);
+
+      if (isValid) {
+        // 2. 핸드폰 토큰 6자리 만들기
+        const mytoken = getToken(6);
+
+        // 3. 핸드폰번호에 토큰 전송하기
+        sendTokenToSMS(args, mytoken);
+
+        return "인증이 완료되었습니다.";
+      }
+
+      return "인증에 실패하였습니다.";
     },
   },
 };
