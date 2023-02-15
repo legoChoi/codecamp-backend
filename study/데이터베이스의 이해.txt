@@ -1,0 +1,10 @@
+브라우저와 백엔드의 연결 : axios
+
+백엔드와 DB(SQL)의 연결 : ORM (Object Relation DB Mapping)
+    1. sequalize
+    2. typeorm
+    3. prisma
+
+백엔드와 DB(NoSQL)의 연결 : ODM (Object Document DB Mapping)
+    1. mongoose
+
