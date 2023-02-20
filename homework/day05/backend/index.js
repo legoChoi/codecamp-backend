@@ -2,10 +2,12 @@ import express, { json } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { options } from "./swagger/config.js";
+import cors from "cors";
 
 const port = 3001;
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
 app.get("/users", (req, res) => {

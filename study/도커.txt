@@ -1,0 +1,51 @@
+도커
+1. 개발/배포 환경 통일
+2. 프로그램 미리 설치
+3. 가벼운 가상 컴퓨터
+
+RUN : 여러번 실행 가능
+CMD : 한번 실행 가능
+
+
+docker ps : 현재 실행중인 도커 프로세스 확인
+exit : 종료(나가기)
+
+--------------------------------------
+
+컨테이너 내에서 localhost 포트로 실행중이라
+밖에서 포스트맨으로 접속할 수 없음
+
+->
+
+도커 포트 포워딩?
+들어오는 포트, 나가는 포트 설정
+들어오는 포트를 나가는 포트로 바꿔주는 느낌
+3001 -> 8000
+
+생성된 도커 이미지 확인
+    docker images
+
+실행중인 도커 프로세스 확인
+    docker ps 
+
+실행중인 도커 프로세스 중단
+    docker stop <CONTAINER ID>
+
+모든 도커 프로세스 출력
+    docker ps -a
+
+모든 도커 프로세스 컨테이너 ID 출력
+    docker ps -a -q
+
+모든 도커 프로세스 삭제 : 백틱으로 감싸면 리눅스 명령어로 인식
+    docker rm `docker ps -a -q`
+
+모든 도커 이미지 삭제
+    docker rmi `docker images -a -q` 
+
+도커 초기화
+    docker system prune -a
+
+포트 포워딩 명령어
+    docker -p <IN>:<OUT> <IMAGE ID>
+
