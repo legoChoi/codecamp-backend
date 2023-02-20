@@ -10,7 +10,9 @@
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
       function openMenu() {
-        axios.get("http://localhost:3001/starbucks");
+        axios.get("http://localhost:3001/starbucks").then((res) => {
+          getCoffe(res);
+        });
       }
     </script>
     <title>메뉴</title>
