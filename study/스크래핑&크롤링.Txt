@@ -1,0 +1,2 @@
+한번 가져오기 : 스크래핑 cheerio
+꾸준히 크롤링 : 크롤링 puppeteer
