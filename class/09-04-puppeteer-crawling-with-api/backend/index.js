@@ -14,6 +14,7 @@ import { options } from "./swagger/config.js";
 import cors from "cors";
 import mongoose, { mongo } from "mongoose";
 import { Board } from "./models/board.model.js";
+import { Stock } from "./models/stock.model.js";
 
 const port = 3001;
 const app = express();
@@ -97,6 +98,11 @@ app.post("/users", (req, res) => {
 
     res.send("가입 완료");
   }
+});
+
+app.get("/stocks", async (req, res) => {
+  const stocks = await Stock.find();
+  res.send(stocks);
 });
 
 // 몽고DB 접속
