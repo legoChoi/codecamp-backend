@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 // 게시판 데이터
 const boardSchema = new mongoose.Schema({
