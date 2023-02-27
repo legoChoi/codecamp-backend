@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^19.7.2"
+  },
+  "name": "09-03-puppeteer-crawling-iframe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

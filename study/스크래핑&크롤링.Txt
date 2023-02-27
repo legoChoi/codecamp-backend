@@ -1,2 +1,5 @@
 한번 가져오기 : 스크래핑 cheerio
 꾸준히 크롤링 : 크롤링 puppeteer
+
+기업에서 허락한 크롤링 가능 데이터 확인
+주소 뒤에 /robot.text /robots.txt
