@@ -1,0 +1,6 @@
+Schema-First
+기존 apollo server 방식
+스키마를 먼저 만듦
+
+Code-First
+api(resolvers)만 만들면 자동으로 스키마 만들어줌
