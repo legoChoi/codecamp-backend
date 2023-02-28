@@ -13,7 +13,7 @@ const productService = new ProductService();
 const pointService = new PointService();
 
 const productController = new ProductController(cashService, productService);
-const couponController = new CouponController(cashService);
+const couponController = new CouponController(pointService);
 
 // 상품 구매하기 AOI
 app.post("/products/buy", productController.buyProduct);
