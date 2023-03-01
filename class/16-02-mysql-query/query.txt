@@ -1,0 +1,56 @@
+show databases;
+
+use myproject03;
+
+show tables
+;
+
+desc product
+;
+
+select * 
+	from product
+;
+
+insert into product(id, name, description, price, isSoldout)
+			values(uuid(), "마우스", "정말 좋은 마우스입니다", 15000, false);
+			
+insert into product(id, name, description, price, isSoldout)
+			values(uuid(), "맥북", "정말 좋은 맥북입니다", 20000, false);
+
+select *
+	from product_slaleslocation
+;
+	
+insert into product_slaleslocation(id, address, addresDetail, lat, lng, meetingTime)
+				values(uuid(), "구로구", "구로디지털단지역", "0.0", "0.1", "2022-12-31")
+;
+
+set 기능
+조건절 없으면 테이블 내 모든 데이터 변경 주의!!
+
+update product
+	set name = "키보드"
+where price = 15000
+;
+
+update product
+	set productSaleslocationId = "c26e8d80-b837-11ed-9ebc-7a5f6bfba95e"
+where name = "키보드" and price = 15000
+;
+
+update product
+	set productSaleslocationId = "c26e8d80-b837-11ed-9ebc-7a5f6bfba95e"
+where name = "키보드" or name = "마우스"
+;
+
+select * from product;
+
+			
+select name, price as "가격", address, addresDetail as "상세 주소"
+	from product p, product_slaleslocation ps 
+where p.productSaleslocationId = ps.id ;
+
+
+
+
