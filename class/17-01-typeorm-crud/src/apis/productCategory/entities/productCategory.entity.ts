@@ -8,7 +8,7 @@ export class ProductCategory {
   @Field(() => String) // gql 타입
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => String) // gql 타입
   name: string;
 }
