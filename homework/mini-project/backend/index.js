@@ -9,26 +9,28 @@ import { getOG } from "./scraping.js";
 const port = 3001;
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3001/" }));
 
 // 회원 가입 API
 app.post("/user", async (req, res) => {
+  console.log("회원가입 API 진입");
   const user = req.body;
 
   // 주민번호가공
-  if (
-    personalFunction.checkRegiNumberLength(user.personal) &&
-    personalFunction.checkRegistrationNumber(user.personal)
-  ) {
-    user.personal = personalFunction.getRegistrationNumber(user.personal);
-  }
+  // if (
+  //   personalFunction.checkRegiNumberLength(user.personal) &&
+  //   personalFunction.checkRegistrationNumber(user.personal)
+  // ) {
+  //   user.personal = personalFunction.getRegistrationNumber(user.personal);
+  // }
 
-  user.og = await getOG(user.prefer);
+  // user.og = await getOG(user.prefer);
 
   // 가입 환영 이메일 전송
   //   const template = emailFunction.getWelcomeTemplate(user);
   //   emailFunction.sendTemplateToEmail(user.email, template);
 
+  console.log(user);
   console.log(user.og);
   res.send("유저 등록 성공");
 });
