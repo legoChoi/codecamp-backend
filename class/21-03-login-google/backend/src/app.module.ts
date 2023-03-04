@@ -11,10 +11,6 @@ import { UserModule } from './apis/users/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: `.dev.env`,
-      isGlobal: true,
-    }), // @nestjs/config .env 파일 사용
     BoardModule,
     ProductModule,
     ProductCategoryModule,
