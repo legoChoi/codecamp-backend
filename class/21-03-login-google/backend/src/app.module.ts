@@ -1,6 +1,5 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './apis/auth/auth.module';
@@ -11,10 +10,6 @@ import { UserModule } from './apis/users/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: `.dev.env`,
-      isGlobal: true,
-    }), // @nestjs/config .env 파일 사용
     BoardModule,
     ProductModule,
     ProductCategoryModule,
