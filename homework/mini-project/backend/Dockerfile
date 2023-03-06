@@ -1,12 +1,12 @@
 FROM node:14
 
-WORKDIR /myfolder/
+WORKDIR /mini-project/
 
-COPY ./package.json /myfolder/
-COPY ./yarn.lock /myfolder/
+COPY ./package.json /mini-project/
+COPY ./yarn.lock /mini-project/
 
 RUN yarn install 
 
-COPY . /myfolder/
+COPY . /mini-project/
 
 CMD yarn dev

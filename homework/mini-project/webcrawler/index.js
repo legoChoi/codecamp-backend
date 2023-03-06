@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import { Starbucks } from "./models/starbucks.model.js";
+import { Starbucks } from "../backend/models/starbucks.model.js";
 
 const link = "https://www.starbucks.co.kr/menu/drink_list.do";
 
@@ -49,6 +49,7 @@ async function crawling() {
       });
 
       await menu.save();
+      console.log(menu);
     }
   }
 
