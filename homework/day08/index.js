@@ -16,20 +16,53 @@ app.post("/tokens/phone", async (req, res) => {
   console.log("token 발급 실행");
 
   // 1. 휴대폰 번호 얻기
-  const data = req.body;
+  const input = req.body;
 
-  if (pFunction.checkValidationPhone(data.phone)) {
+  if (pFunction.checkValidationPhone(input.phone)) {
     console.log("휴대폰 번호 검사 통과");
 
     // 3. 토큰 생성
     const token = pFunction.getToken(6);
     console.log(`token: ${token}`);
 
-    // 2. 해당 휴대폰 번호가 이미 존재하는지 확인
-    const result = await Token.findOne({ phone: data.phone }).exec();
-    console.log(`result: ${result}`);
-    //
-    res.send(`${data.phone}으로 인증 문자가 전송되었습니다.`);
+    // 2. 휴대폰 번호로 등록된 토큰 변경
+    const data = await Token.findOneAndUpdate(
+      { phone: input.phone },
+      { token: token }
+    );
+
+    // 없으면 새로 생성
+    if (!data) {
+      const newToken = new Token({
+        phone: input.phone,
+        token: token,
+      });
+
+      await newToken.save();
+    }
+
+    pFunction.sendTokenToSMS(input.phone, token);
+
+    res.send(`${input.phone}으로 인증 문자가 전송되었습니다.`);
+  }
+});
+
+app.patch("/tokens/phone", async (req, res) => {
+  console.log("token 인증 진행");
+
+  const input = req.body;
+
+  const data = await Token.findOneAndUpdate(
+    { phone: input.phone, token: input.token },
+    { isAuth: true }
+  );
+
+  if (!data) {
+    console.log("토큰 인증 실패");
+    res.send(false);
+  } else {
+    console.log("토큰 인증 성공");
+    res.send(true);
   }
 });
 
