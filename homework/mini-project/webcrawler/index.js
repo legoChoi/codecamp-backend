@@ -1,22 +1,17 @@
 import puppeteer from "puppeteer";
-import { Starbucks } from "../backend/models/starbucks.model.js";
+import mongoose from "mongoose";
+import { Starbucks } from "./models/starbucks.model.js";
 
 const link = "https://www.starbucks.co.kr/menu/drink_list.do";
 
 async function crawling() {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 720 });
   await page.goto(link);
-  await page.waitForTimeout(1000);
+  // await page.waitForTimeout(1000);
 
   for (let i = 1; i <= 19; i += 2) {
-    // 메뉴 카테고리
-    const category = await page.$eval(
-      `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dt:nth-child(${i}) > a`,
-      (e) => e.textContent
-    );
-
     // 카테고리 내 메뉴 개수
     const lastIndex = await page.$$eval(
       `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(${
@@ -43,7 +38,6 @@ async function crawling() {
       );
 
       const menu = new Starbucks({
-        category: category,
         name: name,
         img: img,
       });
@@ -56,4 +50,10 @@ async function crawling() {
   browser.close();
 }
 
-crawling();
+mongoose
+  .connect("mongodb://localhost:27017/mini-project")
+  .then(() => {
+    console.log("mongoDb connection successed!");
+    crawling();
+  })
+  .catch(() => console.log("mongoDB connection failed!"));
