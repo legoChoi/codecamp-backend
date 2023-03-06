@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  my-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./index.js:/mini-project/index.js
+      - ./phone.js:/mini-project/phone.js
+      - ./email.js:/mini-project/mail.js
+      - ./utils.js:/mini-project/utils.js
+      - ./validation.js:/mini-project/validation.js
+      - ./scraping.js:/mini-project/scraping.js
+      - ./models/starbucks.model.js:/mini-project/models/starbucks.model.js
+      - ./models/token.model.js:/mini-project/models/token.model.js
+      - ./models/user.model.js:/mini-project/models/user.model.js
+    ports:
+      - 3001:3001
+
+  my-database:
+    image: mongo:5
+    ports:
+      - 27017:27017

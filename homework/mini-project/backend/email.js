@@ -11,20 +11,23 @@ export function checkValidationEmail(email) {
   return true;
 }
 
-export function getWelcomeTemplate({ name }) {
+export function getWelcomeTemplate({ name, personal, prefer, phone }) {
   return `
     <html>
         <body>
             <h1>${name}님 mini-project 가입을 환영합니다.</h1>
             <hr />
             <div>이름 : ${name}</div>
+            <div>이름 : ${personal}</div>
+            <div>이름 : ${prefer}</div>
+            <div>이름 : ${phone}</div>
             <div>가입일 : ${getToday()}</div>
         </body>
     </html>
 `;
 }
 
-export async function sendTemplateToEmail(email, mytemplate) {
+export async function sendTemplateToEmail(receiver, template) {
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
   const EMAIL_SENDER = process.env.EMAIL_SENDER;
@@ -39,9 +42,9 @@ export async function sendTemplateToEmail(email, mytemplate) {
 
   const result = await transporter.sendMail({
     from: EMAIL_SENDER,
-    to: email,
+    to: receiver,
     subject: "[코드캠프-미니 프로젝트] 가입 축하 메세지",
-    html: mytemplate,
+    html: template,
   });
 
   console.log(result);
