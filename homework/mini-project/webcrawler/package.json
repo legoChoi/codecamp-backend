@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "mongoose": "^7.0.1",
     "puppeteer": "^19.7.3"
   }
 }

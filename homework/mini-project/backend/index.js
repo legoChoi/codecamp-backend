@@ -16,6 +16,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// TODO: Swagger 작성, 전체 구조 도식화
+
 // 회원 가입 API
 app.post("/user", async (req, res) => {
   console.log("회원가입 API 진입");
@@ -116,8 +118,11 @@ app.patch("/tokens/phone", async (req, res) => {
   }
 });
 
-// TODO: 스타벅스 커피 목록 조회 API
-app.get("/starbucks", (req, res) => {});
+// 스타벅스 커피 목록 조회 API
+app.get("/starbucks", async (req, res) => {
+  const menus = await Starbucks.find().exec();
+  res.send(menus);
+});
 
 //
 //
