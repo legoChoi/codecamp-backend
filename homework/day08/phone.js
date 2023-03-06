@@ -1,5 +1,5 @@
-// import coolsms from "coolsms-node-sdk";
-// import "dotenv/config";
+import coolsms from "coolsms-node-sdk";
+import "dotenv/config";
 
 export function checkValidationPhone(myphone) {
   if (myphone.length !== 10 && myphone.length !== 11) {
@@ -29,20 +29,20 @@ export function getToken(count) {
   // console.log(result)
 }
 
-// export async function sendTokenToSMS(fff, ggg) {
-//   const SMS_KEY = process.env.SMS_KEY;
-//   const SMS_SECRET = process.env.SMS_SECRET;
-//   const SMS_SENDER = process.env.SMS_SENDER;
+export async function sendTokenToSMS(receiver, token) {
+  const SMS_KEY = process.env.SMS_KEY;
+  const SMS_SECRET = process.env.SMS_SECRET;
+  const SMS_SENDER = process.env.SMS_SENDER;
 
-//   const mySMS = coolsms.default;
-//   const messageService = new mySMS(SMS_KEY, SMS_SECRET);
+  const mySMS = coolsms.default;
+  const messageService = new mySMS(SMS_KEY, SMS_SECRET);
 
-//   const result = await messageService.sendOne({
-//     to: fff,
-//     from: SMS_SENDER,
-//     text: `[코드캠프-테스트] 인증 번호는 [${ggg}] 입니다.`,
-//   });
+  const result = await messageService.sendOne({
+    to: receiver,
+    from: SMS_SENDER,
+    text: `[코드캠프-테스트] 인증 번호는 [${token}] 입니다.`,
+  });
 
-//   console.log(result);
-//   // console.log(fff + "번호로 인증번호" + ggg + "를 전송합니다!!");
-// }
+  console.log(result);
+  // console.log(fff + "번호로 인증번호" + ggg + "를 전송합니다!!");
+}
