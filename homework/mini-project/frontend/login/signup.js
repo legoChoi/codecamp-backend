@@ -45,23 +45,23 @@ const submitSignup = async () => {
     document.getElementById("SignupPersonal1").value +
     "-" +
     document.getElementById("SignupPersonal2").value;
-  const phoneNumber =
+  const phone =
     document.getElementById("PhoneNumber01").value +
     document.getElementById("PhoneNumber02").value +
     document.getElementById("PhoneNumber03").value;
   const prefer = document.getElementById("SignupPrefer").value;
   const email = document.getElementById("SignupEmail").value;
-
-  console.log(`입력된 값: ${name} ${phoneNumber} ${prefer} ${email}`);
+  const pwd = document.getElementById("SignupPwd").value;
 
   // 회원가입 API 호출
   axios
     .post(signUpAPI, {
       name,
-      personal,
-      phoneNumber,
-      prefer,
       email,
+      personal,
+      prefer,
+      pwd,
+      phone,
     })
     .then((res) => {
       console.log(res.data);
