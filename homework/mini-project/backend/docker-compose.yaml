@@ -7,14 +7,18 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./index.js:/mini-project/index.js
-      - ./phone.js:/mini-project/phone.js
-      - ./email.js:/mini-project/mail.js
-      - ./utils.js:/mini-project/utils.js
-      - ./validation.js:/mini-project/validation.js
-      - ./scraping.js:/mini-project/scraping.js
+      - ./utils/phone.js:/mini-project/utils/phone.js
+      - ./utils/email.js:/mini-project/utils/email.js
+      - ./utils/utils.js:/mini-project/utils/utils.js
+      - ./utils/validation.js:/mini-project/utils/validation.js
+      - ./utils/scraping.js:/mini-project/utils/scraping.js
       - ./models/starbucks.model.js:/mini-project/models/starbucks.model.js
       - ./models/token.model.js:/mini-project/models/token.model.js
       - ./models/user.model.js:/mini-project/models/user.model.js
+      - ./swagger/starbucks.swagger.js:/mini-project/swagger/starbucks.swagger.js
+      - ./swagger/user.swagger.js:/mini-project/swagger/user.swagger.js
+      - ./swagger/token.swagger.js:/mini-project/swagger/token.swagger.js
+      - ./swagger/config.js:/mini-project/swagger/config.js
     ports:
       - 3001:3001
 

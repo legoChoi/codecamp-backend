@@ -2,19 +2,25 @@ import express from "express";
 import cors from "cors";
 
 import mongoose from "mongoose";
-import * as personalFunction from "./validation.js"; // 주민번호 관련 기능
-import * as pFunction from "./phone.js";
-import * as eFunction from "./email.js"; // 이메일 관련 기능
-import { getOG } from "./scraping.js";
+import * as personalFunction from "./utils/validation.js"; // 주민번호 관련 기능
+import * as pFunction from "./utils/phone.js";
+import * as eFunction from "./utils/email.js"; // 이메일 관련 기능
+import { getOG } from "./utils/scraping.js";
 
 import { Token } from "./models/token.model.js";
 import { Starbucks } from "./models/starbucks.model.js";
 import { User } from "./models/user.model.js";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import { options } from "./swagger/config.js";
+
 const port = 3001;
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
 
 // TODO: Swagger 작성, 전체 구조 도식화
 
@@ -42,8 +48,9 @@ app.post("/user", async (req, res) => {
 
     const user = new User({
       ...input,
-      og,
     });
+
+    user.og = og;
 
     await user.save();
     console.log(`user: ${user}`);
