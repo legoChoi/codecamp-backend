@@ -1,0 +1,10 @@
+원자성 Atomicity
+    
+일관성 Consistency
+
+격리성 Isolation
+
+지속성 Durability
+
+
+격리성 레벨
