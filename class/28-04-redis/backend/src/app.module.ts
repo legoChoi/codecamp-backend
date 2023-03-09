@@ -25,7 +25,7 @@ import * as redisStore from 'cache-manager-redis-store';
     AuthModule,
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://my-radis:6379',
+      url: 'redis://my-redis:6379',
       isGlobal: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({

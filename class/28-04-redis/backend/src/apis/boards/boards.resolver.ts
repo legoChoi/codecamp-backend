@@ -29,7 +29,7 @@ export class BoardResolver {
     //
     // 1. 캐시에 등록
     await this.cacheManager.set('aaa', createBoardInput, {
-      ttl: 0,
+      ttl: 10,
     });
 
     //
