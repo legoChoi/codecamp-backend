@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-export async function getOG(url) {
+export default async function getOG(url) {
   const site = await axios.get(url);
 
   const $ = cheerio.load(site.data);
