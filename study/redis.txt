@@ -1,0 +1,8 @@
+Redis? - 메모리 기반 DB => 빠름
+
+빠른 검색용(cache-Aside 패턴)
+    검색 요청 -> Redis에 검색 -> cache-miss면 MySQL에 검색 -> 데이터 획득 후 다음 검색을 위해 Redis에 저장
+    다음 검색부턴 -> Redis에 검색 -> cache-hit 데이터 획득
+VS
+임시 저장용(Write-Back 패턴)
+    요청 -> Redis에 임시 저장 -> MySQL에 저장
