@@ -76,7 +76,7 @@ type ProductTag {
 type Query {
   fetchBoards: [Board!]!
   fetchProduct(productId: String!): Product!
-  fetchProducts: [Product!]!
+  fetchProducts(search: String): [Product!]!
   fetchUser: String!
   fetchPayments: [Payment!]!
 }
