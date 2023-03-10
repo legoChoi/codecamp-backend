@@ -1,0 +1,10 @@
+원리?
+토크나이징
+띄워쓰기 기준으로 토크나이징하여 토큰으로 저장
+
+'Bestshop'
+Best 검색 시 아무것도 안뜸
+
+Analyzer : |특수문자 없앰(Character-Filter) -> 띄워쓰기로 자름(Tokenizer) -> 대문자는 소문자로 바꿈(Token-Filter)|
+
+Analyzer 종류
