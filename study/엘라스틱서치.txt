@@ -1,10 +1,21 @@
 원리?
-토크나이징
-띄워쓰기 기준으로 토크나이징하여 토큰으로 저장
-
 'Bestshop'
 Best 검색 시 아무것도 안뜸
 
 Analyzer : |특수문자 없앰(Character-Filter) -> 띄워쓰기로 자름(Tokenizer) -> 대문자는 소문자로 바꿈(Token-Filter)|
 
 Analyzer 종류
+1. standard (default) - 3가지 모두
+2. whitespace - 2번만
+3. keyword - 전체를 한 단어로
+4. snowball - 영문을 동사원형으로
+5. ngram - 데이터를 n개로 쪼갬
+
+Settings vs Mappings
+Settings
+    Analyzer, Tokenizer, Token-Filter 미리 등록
+    변경 가능하지만 까다로움
+Mappings
+    특정 컬럼에 원하는 Analyzer를 사용할지 미리 등록
+    변경 불가, 이미 데이터가 들어가있는 상태에선 맵핑을 바꿀 수 없음
+    새로운 컬럼에 대한 Analyzer 맵핑 정보는 추가 가능

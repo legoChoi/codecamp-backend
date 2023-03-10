@@ -45,13 +45,21 @@ export class ProductResolver {
   //
   // 상품 모두 조회 API
   @Query(() => [Product])
-  async fetchProducts() {
+  async fetchProducts(
+    @Args({
+      name: 'search',
+      nullable: true,
+    })
+    search: string,
+  ) {
     //
     // 엘라스틱서치에서 조회하기 연습
     const result = await this.elasticsearchService.search({
-      index: 'myproduct03_new',
+      index: 'myproduct0333',
       query: {
-        match_all: {},
+        bool: {
+          should: [{ prefix: { name: search } }],
+        },
       },
     });
 
