@@ -1,0 +1,17 @@
+역인덱스 : Text search 
+
+문장을 단어마다 쪼갬 (토큰나이징) => 역인덱스(역색인)
+쉽게 도와주는 Elasticsearch(NoSQL)
+
+자주 검색되는 것들은 Redis
+
+요청 -> Redis -> Elasticsearch
+
+ELK 스택
+Elasticsearch
+Logstash
+Kibana : 시각화 도구
+
+엘라스틱서치는 여러 컴퓨터에 분산해서 저장함
+1대의 Master node
+여러대의 data node
