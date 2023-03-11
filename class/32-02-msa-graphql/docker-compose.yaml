@@ -9,6 +9,9 @@ services:
       - ./api-gateway/src:/api-gateway/src
     ports:
       - 3000:3000
+    depends_on: # 아래 서비스가 실행된 후 해당 서비스가 실행되게 함
+      - auth-service
+      - resource-service
 
   auth-service:
     build:
