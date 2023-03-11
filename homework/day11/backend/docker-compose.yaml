@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  my-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./index.js:/mini-project/index.js
+      - ./utils:/mini-project/utils
+      - ./models:/mini-project/models
+      - ./swagger:/mini-project/swagger
+      - ./controllers:/mini-project/controllers
+    ports:
+      - 3000:3000
+
+  my-database:
+    image: mongo:5
+    ports:
+      - 27017:27017
