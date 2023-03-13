@@ -28,11 +28,11 @@ import { UserModule } from './apis/users/user.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'my-database',
+      host: '10.115.192.4',
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'mydocker03',
+      database: 'myserver',
       entities: [__dirname + '/apis/**/*.entity.*'], // entity.ts로 끝나는 모든 파일
       synchronize: true, // entity와 테이블 동기화
       logging: true, // 쿼리문 로그 띄워 줌
