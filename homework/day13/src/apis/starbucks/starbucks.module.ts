@@ -6,5 +6,4 @@ import { StarbucksService } from './starbucks.service';
   providers: [StarbucksResolver, StarbucksService],
 })
 export class StarbucksModule {
-  createStarbucks() {}
 }
