@@ -31,7 +31,7 @@ import { UserModule } from './apis/users/user.module';
       host: 'my-database',
       port: 3306,
       username: 'root',
-      password: '0100',
+      password: 'root',
       database: 'mydocker03',
       entities: [__dirname + '/apis/**/*.entity.*'], // entity.ts로 끝나는 모든 파일
       synchronize: true, // entity와 테이블 동기화
