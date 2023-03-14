@@ -1,4 +1,4 @@
-setps:
+steps:
   # 1 단계 => docker-compose -f docker-compose.prod.yaml build
   - name: docker/compose:1.29.0
     args:
