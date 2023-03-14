@@ -10,6 +10,7 @@ import { PointTransactionModule } from './apis/pointTransaction/pointTransaction
 import { ProductCategoryModule } from './apis/productCategory/productCategory.module';
 import { ProductModule } from './apis/products/product.module';
 import { UserModule } from './apis/users/user.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -32,11 +33,12 @@ import { UserModule } from './apis/users/user.module';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'myserver',
+      database: 'myserver03',
       entities: [__dirname + '/apis/**/*.entity.*'], // entity.ts로 끝나는 모든 파일
       synchronize: true, // entity와 테이블 동기화
       logging: true, // 쿼리문 로그 띄워 줌
     }),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
