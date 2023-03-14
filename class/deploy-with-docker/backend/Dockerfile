@@ -9,4 +9,6 @@ RUN yarn install
 
 COPY . /myfolder/
 
-CMD yarn start:dev
+RUN yarn build
+
+CMD yarn start:prod
