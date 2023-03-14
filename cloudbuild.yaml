@@ -19,7 +19,7 @@ setps:
       - set
       - image
       - deployment/mybackend
-      - my-backend03-sha256-1=asia.gcr.io/codecamp-backend-379606/my-backend03:6
+      - my-backend03-sha256-1=asia.gcr.io/codecamp-backend-379606/my-backend03:7
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1
