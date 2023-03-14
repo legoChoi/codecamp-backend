@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   my-backend:
-    image: asia.gcr.io/codecamp-backend-379606/my-backend03:7
+    image: asia.gcr.io/codecamp-backend-379606/my-backend03:8
     platform: linux/x86_64
     build:
       context: .
