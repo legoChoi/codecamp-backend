@@ -9,12 +9,14 @@ services:
       - ./src:/myfolder/src
     ports:
       - 3000:3000
+    depends_on:
+      - my-database
 
   my-database:
     platform: linux/x86_64
     image: mysql:latest
     environment:
-      MYSQL_DATABASE: 'day17'
+      MYSQL_DATABASE: 'day18'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - 3306:3306

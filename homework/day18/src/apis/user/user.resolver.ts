@@ -26,4 +26,11 @@ export class UserResolver {
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.userService.create({ createUserInput });
   }
+
+  createBookmarkedStore(
+    @Args('userId') userId: string,
+    @Args('storeId') storeId: string,
+  ) {
+    return this.userService.likeStore({ userId, storeId });
+  }
 }

@@ -2,16 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Store {
-  id: String!
-  storeName: String!
-  password: String!
-  storeDescription: String!
-  ownerName: String!
-  storePhone: String!
-  users: [User!]!
-}
-
 type User {
   id: String!
   userName: String!
@@ -23,12 +13,14 @@ type User {
   bookmarks: [Store!]!
 }
 
-type Menu {
+type Store {
   id: String!
-  menuName: String!
-  price: Int!
-  description: String!
-  isSoldout: Int!
+  storeName: String!
+  password: String!
+  storeDescription: String!
+  ownerName: String!
+  storePhone: String!
+  users: [User!]!
 }
 
 type MainCategory {
@@ -39,15 +31,48 @@ type MainCategory {
   store: Store!
 }
 
+type Menu {
+  id: String!
+  menuName: String!
+  price: Int!
+  description: String!
+  isSoldout: Int!
+}
+
 type Query {
-  getStoreTest: String!
+  fetchStore(id: String!): Store!
+  fetchStores: [Store!]!
   fetchUsers: [User!]!
   fetchUser(id: String!): User!
   getPointTest: String!
 }
 
 type Mutation {
+  createStore(createStoreInput: CreateStoreInput!): Store!
+  createMenu(createMenuInput: CreateMenuInput!): String!
+  createMainCategory(createMainCategoryInput: CreateMainCategoryInput!): MainCategory!
   createUser(createUserInput: CreateUserInput!): User!
+}
+
+input CreateStoreInput {
+  id: String!
+  storeName: String!
+  password: String!
+  storeDescription: String!
+  ownerName: String!
+  storePhone: String!
+}
+
+input CreateMenuInput {
+  menuName: String!
+  price: Int!
+  description: String!
+}
+
+input CreateMainCategoryInput {
+  name: String!
+  description: String!
+  storeId: String!
 }
 
 input CreateUserInput {
