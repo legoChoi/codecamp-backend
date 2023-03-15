@@ -25,7 +25,7 @@ import { UserModule } from './apis/user/user.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'my-database',
-      database: 'day17',
+      database: 'day18',
       port: 3306,
       username: 'root',
       password: 'root',

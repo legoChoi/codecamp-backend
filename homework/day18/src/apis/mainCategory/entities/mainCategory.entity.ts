@@ -23,7 +23,7 @@ export class MainCategory extends DateEntity {
   @Field(() => String)
   description: string;
 
-  @Column({ type: 'tinyint', comment: '포함된 메뉴 수량' })
+  @Column({ type: 'tinyint', default: 0, comment: '포함된 메뉴 수량' })
   @Field(() => Int)
   menuCount: number;
 

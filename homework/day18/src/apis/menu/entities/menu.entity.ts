@@ -21,7 +21,7 @@ export class Menu extends DateEntity {
   @Field(() => String)
   description: string;
 
-  @Column({ type: 'tinyint', comment: '메뉴 품절 상태' })
+  @Column({ type: 'tinyint', default: 0, comment: '메뉴 품절 상태' })
   @Field(() => Int)
   isSoldout: number;
 }
