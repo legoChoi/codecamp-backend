@@ -1,10 +1,10 @@
 import { Resolver } from '@nestjs/graphql';
-import { MenuMaincategoryService } from './menuMaincategory.service';
+import { MenuMainCategoryService } from './menuMaincategory.service';
 
 @Resolver()
-export class MenuMaincategoryResolver {
+export class MenuMainCategoryResolver {
   constructor(
-    private readonly menuMaincategoryService: MenuMaincategoryService,
+    private readonly menuMainCategoryService: MenuMainCategoryService,
   ) {}
 
   getTest() {

@@ -4,7 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MainCategoryModule } from './apis/mainCategory/mainCategory.module';
 import { MenuModule } from './apis/menu/menu.module';
-import { MenuMaincategoryModule } from './apis/menuMaincategory/menuMaincategory.module';
+import { MenuMainCategoryModule } from './apis/menuMaincategory/menuMaincategory.module';
 import { PointModule } from './apis/point/point.module';
 import { StoreModule } from './apis/store/store.module';
 import User from './apis/user/entities/user.entity';
@@ -15,7 +15,7 @@ import { UserModule } from './apis/user/user.module';
     StoreModule,
     MenuModule,
     MainCategoryModule,
-    MenuMaincategoryModule,
+    MenuMainCategoryModule,
     UserModule,
     PointModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
