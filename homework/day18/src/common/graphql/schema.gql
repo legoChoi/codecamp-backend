@@ -42,6 +42,8 @@ type Menu {
 type Query {
   fetchStore(id: String!): Store!
   fetchStores: [Store!]!
+  fetchMenu(id: String!): Menu!
+  fetchMenus: [Menu!]!
   fetchUsers: [User!]!
   fetchUser(id: String!): User!
   getPointTest: String!
