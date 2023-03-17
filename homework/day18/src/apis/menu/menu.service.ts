@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MainCategory } from '../mainCategory/entities/mainCategory.entity';
 import { MenuMainCategory } from '../menuMaincategory/entities/menuMaincategory.entity';
+import { Store } from '../store/entities/store.entity';
 import { Menu } from './entities/menu.entity';
 
 @Injectable()
@@ -16,6 +17,9 @@ export class MenuService {
 
     @InjectRepository(MenuMainCategory)
     private readonly menuMainCategoryRepository: Repository<MenuMainCategory>,
+
+    @InjectRepository(Store)
+    private readonly storeRepository: Repository<Store>,
   ) {}
 
   async find({ id }) {
@@ -24,6 +28,13 @@ export class MenuService {
 
   async findAll() {
     return await this.menuRepository.find();
+  }
+
+  async findMenusWithCTGFromStore({ storeId }) {
+    // 한 번에 다 join?
+    // 스토어에 존재하는 메인 카테고리 얻고 해당 카테고리 내의 메뉴 얻기를 반복?
+    // 1. 스토어에 포함되는 메인 카테고리 가져오기
+    // 2. 메인 카테고리에 포함되는 메뉴 가져오기
   }
 
   async create({ createMenuInput, mainCategoryId }) {

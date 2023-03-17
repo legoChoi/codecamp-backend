@@ -19,7 +19,10 @@ export class MenuResolver {
     return this.menuService.findAll();
   }
 
-  // test
+  @Query(() => [Menu])
+  fetchStoreMenus(@Args('storeId') storeId: string) {
+    return this.menuService.findMenusWithCTGFromStore({ storeId });
+  }
 
   @Mutation(() => Menu)
   createMenu(
