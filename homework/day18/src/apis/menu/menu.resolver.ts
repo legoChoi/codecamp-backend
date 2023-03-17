@@ -19,6 +19,8 @@ export class MenuResolver {
     return this.menuService.findAll();
   }
 
+  // test
+
   @Mutation(() => Menu)
   createMenu(
     @Args('createMenuInput') createMenuInput: CreateMenuInput, //
