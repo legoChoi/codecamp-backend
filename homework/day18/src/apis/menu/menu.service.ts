@@ -18,6 +18,14 @@ export class MenuService {
     private readonly menuMainCategoryRepository: Repository<MenuMainCategory>,
   ) {}
 
+  async find({ id }) {
+    return await this.menuRepository.findOne({ where: { id } });
+  }
+
+  async findAll() {
+    return await this.menuRepository.find();
+  }
+
   async create({ createMenuInput, mainCategoryId }) {
     console.log(createMenuInput);
 
@@ -27,19 +35,18 @@ export class MenuService {
       ...createMenuInput,
     });
 
-    // 메인 카테고리 불러오기
+    // 2. 메인 카테고리 불러오기
     const mainCategory = await this.mainCategoryRepository.findOne({
       where: { id: mainCategoryId },
     });
 
     //
-    // 2. 메뉴 & 메인 카테고리 연결
+    // 3. 메뉴 & 메인 카테고리 연결
     await this.menuMainCategoryRepository.save({
       menu,
       mainCategory,
     });
 
-    //
     //
     return menu;
   }

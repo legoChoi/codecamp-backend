@@ -16,7 +16,7 @@ export class StoreResolver {
 
   @Query(() => [Store])
   fetchStores() {
-    return this.storeService.findAll();
+    return this.storeService.findAll;
   }
 
   @Mutation(() => Store)
