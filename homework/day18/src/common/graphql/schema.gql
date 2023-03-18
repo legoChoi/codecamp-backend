@@ -47,7 +47,6 @@ type Query {
   fetchStoreMenus(storeId: String!): [Menu!]!
   fetchUsers: [User!]!
   fetchUser(id: String!): User!
-  getPointTest: String!
 }
 
 type Mutation {
@@ -55,6 +54,7 @@ type Mutation {
   createMenu(createMenuInput: CreateMenuInput!, mainCategoryId: String!): Menu!
   createMainCategory(createMainCategoryInput: CreateMainCategoryInput!): MainCategory!
   createUser(createUserInput: CreateUserInput!): User!
+  plusPoint(pointValue: Float!, userId: String!): String!
 }
 
 input CreateStoreInput {
