@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
 export abstract class DateEntity {
   @CreateDateColumn({ comment: '생성일' })
   createdAt: Date;
