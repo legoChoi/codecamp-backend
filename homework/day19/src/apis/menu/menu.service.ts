@@ -30,6 +30,10 @@ export class MenuService {
     return await this.menuRepository.find();
   }
 
+  async findAllWithDeleted() {
+    return await this.menuRepository.find({ withDeleted: true });
+  }
+
   async findMenusWithCTGFromStoreWithDeleted({ storeId }) {
     // 한 번에 다 join?
     // 스토어에 존재하는 메인 카테고리 얻고 해당 카테고리 내의 메뉴 얻기를 반복?
