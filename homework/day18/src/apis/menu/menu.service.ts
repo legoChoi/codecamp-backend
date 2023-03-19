@@ -38,8 +38,6 @@ export class MenuService {
   }
 
   async create({ createMenuInput, mainCategoryId }) {
-    console.log(createMenuInput);
-
     //
     // 1. 메뉴 만들기
     const menu = await this.menuRepository.save({
@@ -60,5 +58,19 @@ export class MenuService {
 
     //
     return menu;
+  }
+
+  async update({ menuId, updateMenuInput }) {
+    const menu = await this.menuRepository.findOne({
+      where: { id: menuId },
+    });
+
+    const updatedMenu = {
+      ...menu,
+      id: menuId,
+      ...updateMenuInput,
+    };
+
+    return await this.menuRepository.save(updatedMenu);
   }
 }

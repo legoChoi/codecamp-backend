@@ -51,7 +51,8 @@ type Query {
 
 type Mutation {
   createStore(createStoreInput: CreateStoreInput!): Store!
-  createMenu(createMenuInput: CreateMenuInput!, mainCategoryId: String!): Menu!
+  createMenu(mainCategoryId: String!, createMenuInput: CreateMenuInput!): Menu!
+  updateMenu(menuId: String!, updateMenuInput: UpdateMenuInput!): Menu!
   createMainCategory(createMainCategoryInput: CreateMainCategoryInput!): MainCategory!
   createUser(createUserInput: CreateUserInput!): User!
   plusPoint(pointValue: Float!, userId: String!): String!
@@ -70,6 +71,12 @@ input CreateMenuInput {
   menuName: String!
   price: Int!
   description: String!
+}
+
+input UpdateMenuInput {
+  menuName: String
+  price: Int
+  description: String
 }
 
 input CreateMainCategoryInput {
