@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  userName: String!
+  userNick: String!
+  userPhone: String!
+  password: String!
+  age: Int!
+  userPoint: Int!
+  bookmarks: [Store!]!
+}
+
+type Store {
+  id: String!
+  storeName: String!
+  password: String!
+  storeDescription: String!
+  ownerName: String!
+  storePhone: String!
+  users: [User!]!
+}
+
+type MainCategory {
+  id: String!
+  name: String!
+  description: String!
+  menuCount: Int!
+  store: Store!
+}
+
+type Menu {
+  id: String!
+  menuName: String!
+  price: Int!
+  description: String!
+  isSoldout: Int!
+}
+
+type Query {
+  fetchStore(id: String!): Store!
+  fetchStores: [Store!]!
+  fetchMenu(id: String!): Menu!
+  fetchMenus: [Menu!]!
+  fetchStoreMenusWithDeleted(storeId: String!): [Menu!]!
+  fetchUsers: [User!]!
+  fetchUser(id: String!): User!
+}
+
+type Mutation {
+  createStore(createStoreInput: CreateStoreInput!): String!
+  createMenu(mainCategoryId: String!, createMenuInput: CreateMenuInput!): Menu!
+  updateMenu(menuId: String!, updateMenuInput: UpdateMenuInput!): Menu!
+  deleteMenu(menuId: String!): Menu!
+  createMainCategory(createMainCategoryInput: CreateMainCategoryInput!): MainCategory!
+  createUser(createUserInput: CreateUserInput!): User!
+  plusPoint(pointValue: Float!, userId: String!): String!
+}
+
+input CreateStoreInput {
+  id: String!
+  storeName: String!
+  password: String!
+  storeDescription: String!
+  ownerName: String!
+  storePhone: String!
+}
+
+input CreateMenuInput {
+  menuName: String!
+  price: Int!
+  description: String!
+}
+
+input UpdateMenuInput {
+  menuName: String
+  price: Int
+  description: String
+}
+
+input CreateMainCategoryInput {
+  name: String!
+  description: String!
+  storeId: String!
+}
+
+input CreateUserInput {
+  id: String!
+  userName: String!
+  userNick: String!
+  userPhone: String!
+  password: String!
+  age: Int!
+}
