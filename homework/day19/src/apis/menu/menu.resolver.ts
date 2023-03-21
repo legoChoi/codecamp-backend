@@ -20,7 +20,6 @@ export class MenuResolver {
     return this.menuService.findAll();
   }
 
-  //
   @Query(() => [Menu])
   fetchAllWithDeleted() {
     return this.menuService.findAllWithDeleted();

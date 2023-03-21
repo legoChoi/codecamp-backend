@@ -27,7 +27,7 @@ export default class User extends DateEntity {
 
   // 패스워드
   @Column({ type: 'varchar', length: 15, comment: '유저 패스워드' })
-  @Field(() => String)
+  // @Field(() => String)
   password: string;
 
   // 나이

@@ -19,7 +19,7 @@ export class StoreResolver {
     return this.storeService.findAll;
   }
 
-  @Mutation(() => String)
+  @Mutation(() => Store)
   createStore(
     @Args('createStoreInput') createStoreInput: CreateStoreInput, //
   ) {
