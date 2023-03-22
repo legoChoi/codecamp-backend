@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Store } from '../store/entities/store.entity';
@@ -15,6 +15,9 @@ export class UserService {
   ) {}
 
   async create({ createUserInput }) {
+    const user = await this.userRepository.findOne({ id: createUserInput.id });
+    if (user) throw new ConflictException('이미 등록된 id 입니다.');
+
     return await this.userRepository.save({
       ...createUserInput,
     });

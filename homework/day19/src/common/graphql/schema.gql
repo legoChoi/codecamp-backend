@@ -7,7 +7,6 @@ type User {
   userName: String!
   userNick: String!
   userPhone: String!
-  password: String!
   age: Int!
   userPoint: Int!
   bookmarks: [Store!]!
@@ -51,7 +50,7 @@ type Query {
 }
 
 type Mutation {
-  createStore(createStoreInput: CreateStoreInput!): String!
+  createStore(createStoreInput: CreateStoreInput!): Store!
   createMenu(mainCategoryId: String!, createMenuInput: CreateMenuInput!): Menu!
   updateMenu(menuId: String!, updateMenuInput: UpdateMenuInput!): Menu!
   deleteMenu(menuId: String!): Menu!
@@ -92,6 +91,5 @@ input CreateUserInput {
   userName: String!
   userNick: String!
   userPhone: String!
-  password: String!
   age: Int!
 }
