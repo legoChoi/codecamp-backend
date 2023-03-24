@@ -1,13 +1,13 @@
 import { PassportStrategy } from '@nestjs/passport';
-import { Profile, Strategy } from 'passport-google-oauth20';
+import { Strategy, Profile } from 'passport-naver';
 import 'dotenv/config';
 
-export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
+export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
   constructor() {
     super({
-      clientID: process.env.OAUTH_GOOGLE_ID,
-      clientSecret: process.env.OAUTH_GOOGLE_SECRET,
-      callbackURL: process.env.OAUTH_GOOGLE_CALLBACK,
+      clientID: process.env.OAUTH_NAVER_ID,
+      clientSecret: process.env.OAUTH_NAVER_SECRET,
+      callbackURL: process.env.OAUTH_NAVER_CALLBACK,
       scope: ['email', 'profile'],
     });
   }
@@ -17,13 +17,9 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
     refreshToken: string,
     profile: Profile,
   ) {
-    console.log(accessToken);
-    console.log(refreshToken);
-    console.log(profile);
-
     return {
       email: profile.emails[0].value,
-      password: '12345678',
+      password: profile.id,
       name: profile.displayName,
       age: 0,
     };

@@ -2,7 +2,6 @@ import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import { User } from '../users/entities/user.entity';
-import { UserService } from '../users/user.service';
 import { AuthService } from './auth.service';
 
 interface IOAuthUser {
@@ -11,38 +10,38 @@ interface IOAuthUser {
 
 @Controller()
 export class AuthController {
-  constructor(
-    private readonly userService: UserService, //
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
+  //
+  // 구글 로그인
   @Get('/login/google')
   @UseGuards(AuthGuard('google'))
   async loginGoogle(
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    // 1. 가입확인
-    console.log('가입 확인 진행');
-    let user = await this.userService.findOne({ email: req.user.email });
+    this.authService.loginOAuth({ req, res });
+  }
 
-    // 2. 회원가입
-    console.log('회원 가입 진행');
-    if (!user) {
-      user = await this.userService.create({
-        email: req.user.email,
-        hashedPassword: req.user.password,
-        name: req.user.name,
-        age: req.user.age,
-      });
-    }
+  //
+  // 네이버 로그인
+  @Get('/login/naver')
+  @UseGuards(AuthGuard('naver'))
+  async loginNaver(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    this.authService.loginOAuth({ req, res });
+  }
 
-    // 3. 로그인
-    console.log('로그인 진행');
-    this.authService.setRefreshToken({ user, res });
-
-    res.redirect(
-      'http://localhost:5500/class/21-03-login-google/frontend/social-login.html',
-    );
+  //
+  // 카카오 로그인
+  @Get('/login/kakao')
+  @UseGuards(AuthGuard('kakao'))
+  async loginKakao(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    this.authService.loginOAuth({ req, res });
   }
 }

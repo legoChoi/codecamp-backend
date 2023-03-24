@@ -22,14 +22,14 @@ import { UserModule } from './apis/users/user.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: 'my-database',
+      database: 'day21',
       port: 3306,
       username: 'root',
-      password: '0100',
-      database: 'codecamp_project',
-      entities: [__dirname + '/apis/**/*.entity.*'], // entity.ts로 끝나는 모든 파일
-      synchronize: true, // entity와 테이블 동기화
-      logging: true, // 쿼리문 로그 띄워 줌
+      password: 'root',
+      entities: [__dirname + '/apis/**/*.entity.*'],
+      synchronize: true,
+      logging: true,
     }),
   ],
 })
