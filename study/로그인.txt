@@ -1,0 +1,4 @@
+라이브러리
+해시 - bcrypt
+인증 - JWT
+인가 - passport
