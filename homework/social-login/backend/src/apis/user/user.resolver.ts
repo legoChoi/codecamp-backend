@@ -2,6 +2,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Resolver()
 export class UserResolver {
@@ -30,4 +32,8 @@ export class UserResolver {
       phone,
     });
   }
+
+  @UseGuards(AuthGuard('guard')) // 필터링
+  @Query(() => String)
+  fetchUser() {}
 }
