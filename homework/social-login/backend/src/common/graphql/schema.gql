@@ -12,6 +12,7 @@ type User {
 
 type Query {
   getHello: String!
+  fetchUser: String!
 }
 
 type Mutation {

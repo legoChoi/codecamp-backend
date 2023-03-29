@@ -2,3 +2,17 @@
 해시 - bcrypt
 인증 - JWT
 인가 - passport
+
+Access Token 짧은 유효기간
+Refresh Token 긴 유효기간
+
+1.  프론트: 로그인 API 요청
+    백: Access Token과 Refresh Token 발급(전달)
+
+2.  프론트: Access Token을 전달하며 API 요청
+    백: Access Token 검사
+
+3.  백: Access Token 만료 알림
+    프론트: Refresh Token 전달
+
+4.  백: 새로 발급한 Access Token과 Refresh Token 전달
