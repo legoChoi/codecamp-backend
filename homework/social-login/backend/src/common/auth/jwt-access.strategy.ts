@@ -8,4 +8,13 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'guard') {
       secretOrKey: 'testAccessKey',
     });
   }
+
+  validate(payload) {
+    console.log(payload);
+
+    return {
+      userId: payload.userId,
+      id: payload.id,
+    };
+  }
 }
