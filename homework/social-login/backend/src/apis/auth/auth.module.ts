@@ -5,6 +5,7 @@ import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
+import { JwtRefreshStrategy } from 'src/common/auth/jwt-refresh.strategy';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthService } from './auth.service';
     AuthResolver, //
     AuthService,
     UserService,
+    JwtRefreshStrategy,
   ],
 })
 export class AuthModule {}

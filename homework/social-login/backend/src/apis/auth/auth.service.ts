@@ -10,7 +10,18 @@ export class AuthService {
   getAccessToken({ user }) {
     return this.jwtService.sign(
       { userId: user.userId, sub: user.id }, // 데이터
-      { secret: 'testAccessKey', expiresIn: '1h' }, // 옵션
+      { secret: 'testAccessKey', expiresIn: '20s' }, // 옵션
     );
+  }
+
+  setRefreshToken({ user, res }) {
+    const refreshToken = this.jwtService.sign(
+      { userId: user.userId, sub: user.id },
+      { secret: 'testRefreshKey', expiresIn: '2w' },
+    );
+
+    console.log(refreshToken);
+
+    res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
   }
 }

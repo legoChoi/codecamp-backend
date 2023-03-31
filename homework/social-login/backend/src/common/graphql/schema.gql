@@ -18,4 +18,5 @@ type Query {
 type Mutation {
   createUser(userId: String!, pwd: String!, nick: String!, phone: String!): User!
   login(userId: String!, pwd: String!): String!
+  restoreRefreshToken: String!
 }
