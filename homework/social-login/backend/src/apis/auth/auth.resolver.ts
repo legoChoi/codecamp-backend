@@ -25,6 +25,7 @@ export class AuthResolver {
         '해당하는 아이디로 가입된 계정이 없습니다.',
       );
 
+    // 1-2. 비밀번호 검증 실패
     const isAuth = await bcrypt.compare(pwd, user.pwd);
     if (!isAuth) throw new UnprocessableEntityException('틀린 비밀번호');
 

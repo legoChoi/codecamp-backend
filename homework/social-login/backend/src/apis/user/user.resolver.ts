@@ -4,6 +4,8 @@ import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GqlAuthAccessGuard } from 'src/common/auth/gql-auth.guard';
+import { CurrentUser } from 'src/common/auth/gql-user.param';
 
 @Resolver()
 export class UserResolver {
@@ -23,7 +25,7 @@ export class UserResolver {
     @Args('nick') nick: string,
     @Args('phone') phone: string,
   ) {
-    const hashedPassword = await bcrypt.hash(pwd, 10); // 비밀번호 bcrypt 해싱
+    const hashedPassword = await bcrypt.hash(pwd, 10);
 
     return this.userService.create({
       userId,
@@ -33,7 +35,13 @@ export class UserResolver {
     });
   }
 
-  @UseGuards(AuthGuard('guard')) // 필터링
+  @UseGuards(GqlAuthAccessGuard) // 필터링
   @Query(() => String)
-  fetchUser() {}
+  fetchUser(
+    @CurrentUser() currentUser: any, //
+  ) {
+    console.log('test', currentUser);
+
+    return 'test fetchUser';
+  }
 }
