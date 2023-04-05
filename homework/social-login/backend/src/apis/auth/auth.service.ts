@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
+import * as authTool from 'src/common/tools/auth.tool';
 import 'dotenv/config';
 
 @Injectable()
@@ -26,6 +27,14 @@ export class AuthService {
     console.log(refreshToken);
 
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
+  }
+
+  getSmsToken(): string {
+    return authTool.getSmsToken(6);
+  }
+
+  async check(to: string, token: string) {
+    return authTool.sendSmsTokenToSMS(to, token);
   }
 
   async loginOAuth({ req, res }) {
