@@ -31,8 +31,8 @@ export class AuthResolver {
       );
 
     // 1-2. 비밀번호 검증 실패
-    const isAuth = await bcrypt.compare(pwd, user.pwd);
-    if (!isAuth) throw new UnprocessableEntityException('틀린 비밀번호');
+    // const isAuth = await bcrypt.compare(pwd, user.pwd);
+    // if (!isAuth) throw new UnprocessableEntityException('틀린 비밀번호');
 
     console.log('SetRefreshToken');
     this.authService.setRefreshToken({ user, res: context.res });

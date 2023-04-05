@@ -1,25 +1,29 @@
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-jwt';
+import { Profile, Strategy } from 'passport-google-oauth20';
 import 'dotenv/config';
 
 export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
     super({
-      clienID: process.env.OAUTH_GOOGLE_ID,
+      clientID: process.env.OAUTH_GOOGLE_ID,
       clientSecret: process.env.OAUTH_GOOGLE_SECRET,
       callbackURL: process.env.OAUTH_GOOGLE_CALLBACK,
-      scope: ['userId', 'profile'],
+      scope: ['email', 'profile'],
     });
   }
 
-  validate(accessToken, refreshToken, profile) {
-    console.log(accessToken);
-    console.log(refreshToken);
+  validate(
+    accessToken: string, //
+    refreshToken: string,
+    profile: Profile,
+  ) {
+    console.log('access: ', accessToken);
+    console.log('refresh: ', refreshToken);
     console.log(profile);
 
     return {
       userId: profile.emails[0].value,
-      pwd: 'hashedpw',
+      social_type: 2,
     };
   }
 }

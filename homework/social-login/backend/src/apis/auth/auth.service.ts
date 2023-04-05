@@ -13,14 +13,14 @@ export class AuthService {
   getAccessToken({ user }) {
     return this.jwtService.sign(
       { userId: user.userId, sub: user.id }, // 데이터
-      { secret: process.env.JWT_ACCESS_KEY, expiresIn: '20s' }, // 옵션
+      { secret: 'testAccessKey', expiresIn: '20s' }, // 옵션
     );
   }
 
   setRefreshToken({ user, res }) {
     const refreshToken = this.jwtService.sign(
       { userId: user.userId, sub: user.id },
-      { secret: process.env.JWT_REFRESH_KEY, expiresIn: '2w' },
+      { secret: 'testRefreshKey', expiresIn: '2w' },
     );
 
     console.log(refreshToken);
@@ -28,19 +28,17 @@ export class AuthService {
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
   }
 
-  async loginOAuth({ req, res, social_type }) {
-    console.log('social type :', social_type);
+  async loginOAuth({ req, res }) {
+    console.log(req.user);
 
     // 1. 가입 확인
     let user = await this.userService.findOne({ userId: req.user.userId });
 
     // 2. 회원 가입
     if (!user) {
-      const { pwd, ...rest } = req.user;
-      const createUser = { ...rest, hashedPassword: pwd };
-      user = await this.userService.create({ ...createUser });
+      const { userId, social_type } = req.user;
+      user = await this.userService.social_create({ userId, social_type });
     }
-
     this.setRefreshToken({ user, res });
 
     res.redirect(

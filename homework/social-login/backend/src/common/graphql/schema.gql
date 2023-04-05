@@ -5,7 +5,6 @@
 type User {
   id: String!
   userId: String!
-  pwd: String!
   nick: String!
   birthday: String!
   phone: String!
