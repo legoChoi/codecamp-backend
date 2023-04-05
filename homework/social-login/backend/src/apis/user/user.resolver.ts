@@ -24,6 +24,8 @@ export class UserResolver {
     @Args('pwd') pwd: string,
     @Args('nick') nick: string,
     @Args('phone') phone: string,
+    @Args('birthday') birthday: string,
+    @Args('gender') gender: Number,
   ) {
     const hashedPassword = await bcrypt.hash(pwd, 10);
 
@@ -32,6 +34,8 @@ export class UserResolver {
       hashedPassword,
       nick,
       phone,
+      birthday,
+      gender,
     });
   }
 

@@ -27,21 +27,21 @@ export class User {
   @Field(() => String)
   nick: string;
 
-  // @Column({ comment: '회원 생일' })
-  // @Field(() => String)
-  // birthday: string;
+  @Column({ comment: '회원 생일' })
+  @Field(() => String)
+  birthday: string;
 
   @Column({ comment: '회원 휴대폰 번호' })
   @Field(() => String)
   phone: string;
 
-  // @Column({ comment: '회원 성별 0 남 / 1 여' })
-  // @Field(() => Int)
-  // gender: number;
+  @Column({ comment: '회원 성별 0 남 / 1 여' })
+  @Field(() => Int)
+  gender: number;
 
-  // @Column({ comment: '소셜 아이디 코드 0 카카오 / 1 네이버 / 2 구글' })
-  // @Field(() => Int)
-  // social_type: number;
+  @Column({ comment: '소셜 아이디 코드 0 카카오 / 1 네이버 / 2 구글' })
+  @Field(() => Int)
+  social_type: number;
 
   @CreateDateColumn({ comment: '생성일' })
   createdAt: Date;
