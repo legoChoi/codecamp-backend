@@ -7,5 +7,7 @@ type Query {
 }
 
 type Mutation {
+  getToken: String!
+  startSMSAuth(phone: String!): String!
   restoreRefreshToken: String!
 }
