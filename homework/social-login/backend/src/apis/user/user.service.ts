@@ -10,30 +10,26 @@ export class UserService {
     private readonly userRepository: Repository<User>, //
   ) {}
 
-  getHello(): string {
-    return 'Hello';
+  async findOne({ userName }) {
+    return await this.userRepository.findOne({ where: { userName } });
   }
 
-  async findOne({ userId }) {
-    return await this.userRepository.findOne({ where: { userId } });
-  }
+  // async create({ userId, hashedPassword: pw, nick, phone, birthday, gender }) {
+  //   const user = await this.userRepository.findOne({ where: { userId } });
 
-  async create({ userId, hashedPassword: pw, nick, phone, birthday, gender }) {
-    const user = await this.userRepository.findOne({ where: { userId } });
+  //   if (user) throw new ConflictException('이미 등록된 계정입니다.');
 
-    if (user) throw new ConflictException('이미 등록된 계정입니다.');
+  //   return await this.userRepository.save({
+  //     userId,
+  //     password: pw,
+  //     nick,
+  //     phone,
+  //     birthday,
+  //     gender,
+  //   });
+  // }
 
-    return await this.userRepository.save({
-      userId,
-      password: pw,
-      nick,
-      phone,
-      birthday,
-      gender,
-    });
-  }
-
-  async social_create({ userId, social_type }) {
-    return await this.userRepository.save({ userId, social_type });
+  async social_create({ userId, userName, social_type }) {
+    return await this.userRepository.save({ userId, userName, social_type });
   }
 }
