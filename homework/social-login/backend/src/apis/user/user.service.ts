@@ -32,4 +32,8 @@ export class UserService {
       gender,
     });
   }
+
+  async social_create({ userId, social_type }) {
+    return await this.userRepository.save({ userId, social_type });
+  }
 }

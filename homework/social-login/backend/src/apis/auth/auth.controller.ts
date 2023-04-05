@@ -4,7 +4,7 @@ import { User } from '../user/entities/user.entity';
 import { AuthService } from './auth.service';
 
 interface IOAuthUser {
-  user: Pick<User, 'userId' | 'pwd' | 'phone' | 'birthday' | 'social_type'>;
+  user: Pick<User, 'userId' | 'phone' | 'birthday' | 'social_type'>;
 }
 
 @Controller()
@@ -19,6 +19,24 @@ export class AuthController {
     @Req() req: Request & IOAuthUser, //
     @Res() res: Response,
   ) {
-    this.authService.loginOAuth({ req, res, social_type: 2 });
+    this.authService.loginOAuth({ req, res });
+  }
+
+  @Get('/login/kakao')
+  @UseGuards(AuthGuard('kakao'))
+  loginKaKao(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    this.authService.loginOAuth({ req, res });
+  }
+
+  @Get('/login/naver')
+  @UseGuards(AuthGuard('naver'))
+  loginNaver(
+    @Req() req: Request & IOAuthUser, //
+    @Res() res: Response,
+  ) {
+    this.authService.loginOAuth({ req, res });
   }
 }

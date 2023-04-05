@@ -19,27 +19,36 @@ export class User {
   @Field(() => String)
   userId: string;
 
-  @Column({ comment: '회원 비밀번호' })
-  @Field(() => String)
-  pwd: string;
+  // @Column({ comment: '회원 비밀번호' })
+  // // @Field(() => String)
+  // pwd: string;
 
-  @Column({ comment: '회원 닉네임' })
+  @Column({ comment: '회원 닉네임', default: '' })
   @Field(() => String)
   nick: string;
 
-  @Column({ comment: '회원 생일' })
+  @Column({ comment: '회원 생일', default: '' })
   @Field(() => String)
   birthday: string;
 
-  @Column({ comment: '회원 휴대폰 번호' })
+  @Column({ comment: '회원 휴대폰 번호', default: '' })
   @Field(() => String)
   phone: string;
 
-  @Column({ comment: '회원 성별 0 남 / 1 여' })
+  @Column({
+    type: 'tinyint',
+    width: 1,
+    comment: '회원 성별 0 남 / 1 여',
+    default: 0,
+  })
   @Field(() => Int)
   gender: number;
 
-  @Column({ comment: '소셜 아이디 코드 0 카카오 / 1 네이버 / 2 구글' })
+  @Column({
+    type: 'tinyint',
+    width: 1,
+    comment: '소셜 아이디 코드 0 카카오 / 1 네이버 / 2 구글',
+  })
   @Field(() => Int)
   social_type: number;
 
