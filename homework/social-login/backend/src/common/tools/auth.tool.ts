@@ -1,3 +1,4 @@
+import { ConflictException } from '@nestjs/common';
 import coolsms from 'coolsms-node-sdk';
 import 'dotenv/config';
 
@@ -35,5 +36,4 @@ export async function sendSmsTokenToSMS(to, token) {
   });
 
   console.log(result);
-  return token;
 }

@@ -2,12 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type SmsToken {
+  id: String!
+  phone: String!
+  token: String!
+  isAuth: Boolean!
+  isValid: Boolean!
+}
+
 type Query {
   fetchUser: String!
 }
 
 type Mutation {
-  getToken: String!
-  startSMSAuth(phone: String!): String!
+  startSMSAuth(phone: String!): SmsToken!
+  endSMSAuth(phone: String!, token: String!): SmsToken!
   restoreRefreshToken: String!
 }
