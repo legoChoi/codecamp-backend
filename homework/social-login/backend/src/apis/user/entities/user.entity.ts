@@ -23,6 +23,10 @@ export class User {
   // // @Field(() => String)
   // pwd: string;
 
+  @Column({ comment: '회원 이름', default: '' })
+  @Field(() => String)
+  userName: string;
+
   @Column({ comment: '회원 닉네임', default: '' })
   @Field(() => String)
   nick: string;

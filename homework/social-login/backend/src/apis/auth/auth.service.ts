@@ -32,13 +32,13 @@ export class AuthService {
     console.log(req.user);
 
     // 1. 가입 확인
-    let user = await this.userService.findOne({ userId: req.user.userId });
+    let user = await this.userService.findOne({ userName: req.user.userName });
 
     // 2. 회원 가입
     if (!user) {
-      const { userId, social_type } = req.user;
-      user = await this.userService.social_create({ userId, social_type });
+      user = await this.userService.social_create({ ...req.user });
     }
+
     this.setRefreshToken({ user, res });
 
     res.redirect(
