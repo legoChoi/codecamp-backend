@@ -7,7 +7,10 @@ type User {
   userId: String!
   pwd: String!
   nick: String!
+  birthday: String!
   phone: String!
+  gender: Int!
+  social_type: Int!
 }
 
 type Query {
@@ -16,7 +19,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(userId: String!, pwd: String!, nick: String!, phone: String!): User!
+  createUser(userId: String!, pwd: String!, nick: String!, phone: String!, birthday: String!, gender: Float!): User!
   login(userId: String!, pwd: String!): String!
   restoreRefreshToken: String!
 }

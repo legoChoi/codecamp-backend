@@ -6,6 +6,8 @@ import { UserService } from '../user/user.service';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtRefreshStrategy } from 'src/common/auth/jwt-refresh.strategy';
+import { AuthController } from './auth.controller';
+import { JwtGoogleStrategy } from 'src/common/auth/jwt-social-google.strategy';
 
 @Module({
   imports: [
@@ -17,6 +19,10 @@ import { JwtRefreshStrategy } from 'src/common/auth/jwt-refresh.strategy';
     AuthService,
     UserService,
     JwtRefreshStrategy,
+    JwtGoogleStrategy,
+  ],
+  controllers: [
+    AuthController, //
   ],
 })
 export class AuthModule {}
