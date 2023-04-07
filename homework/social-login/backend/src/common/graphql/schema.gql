@@ -12,10 +12,16 @@ type SmsToken {
 
 type Query {
   fetchUser: String!
+  getSMSAuthLast: SmsToken!
 }
 
 type Mutation {
-  startSMSAuth(phone: String!): SmsToken!
-  endSMSAuth(phone: String!, token: String!): SmsToken!
+  """SMS 인증 요청"""
+  requestSMSAuth(phone: String!): SmsToken!
+
+  """SMS 인증 검증"""
+  responseSMSAuth(phone: String!, token: String!): SmsToken!
+
+  """Access Token 재발급"""
   restoreRefreshToken: String!
 }

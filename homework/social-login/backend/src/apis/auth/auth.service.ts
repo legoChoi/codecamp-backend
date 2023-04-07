@@ -35,10 +35,19 @@ export class AuthService {
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
   }
 
-  async sendSMS(to: string) {
+  async sendSmsAuthRequest(to: string) {
     const token = authTool.getSmsToken(6);
 
-    authTool.sendSmsTokenToSMS(to, token);
+    //
+    // 1. 유효한 검증 토큰 찾기
+
+    //
+    // 2. 유효한 토큰 있으면 isValid false로 업데이트
+
+    //
+    // 3. 새로운 유효 검증 토큰 발급
+
+    // authTool.sendSmsTokenToSMS(to, token);
 
     return await this.smsTokenRepository.save({
       phone: to,
@@ -46,12 +55,31 @@ export class AuthService {
     });
   }
 
+  async getLast() {
+    const row = await this.smsTokenRepository.findOne({
+      where: { phone: '01051275208', isValid: true },
+    });
+
+    // console.log(tmp.isValid);
+    // console.log(`${tmp.isValid}와 true 비교: ${tmp.isValid === true}`);
+    // console.log(`${tmp.isValid}와 false 비교: ${tmp.isValid === false}`);
+
+    return row;
+  }
+
   // TODO:
-  async authSMS({ phone, token }) {
+  async checkSmsAuthResponse({ phone, token }) {
+    //
     // 1. 유효한 검증 토큰 찾기
     const row = await this.smsTokenRepository.findOne({
       where: { phone, isValid: true },
     });
+
+    //
+    // 2. 유효한 토큰 있으면 isValid false로 업데이트
+
+    //
+    // 3. 새로운 유효 검증 토큰 발급
 
     //
     // 2. 토큰 비교
@@ -93,4 +121,17 @@ export class AuthService {
       'http://localhost:5500/homework/social-login/frontend/social-login.html',
     );
   }
+
+  /*
+    소셜 로그인 로직
+    1. 소셜 로그인
+
+    2. sms 인증
+
+    3. 추가 정보 입력
+      + 유저 이름 입력 받아야 할 듯
+      닉네임
+      생년월일
+      성별
+  */
 }
