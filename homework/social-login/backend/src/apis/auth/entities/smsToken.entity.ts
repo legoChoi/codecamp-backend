@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('sms_token')
 @ObjectType()
 export class SmsToken {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('increment')
   @Field(() => String)
   id: string;
 
@@ -20,7 +20,7 @@ export class SmsToken {
   @Field(() => Boolean)
   isAuth: boolean;
 
-  @Column({ comment: '유효 상태', default: false })
+  @Column({ comment: '유효 상태', default: true })
   @Field(() => Boolean)
   isValid: boolean;
 }

@@ -1,5 +1,5 @@
 import { UnprocessableEntityException, UseGuards } from '@nestjs/common';
-import { Args, Context, Int, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service';
@@ -16,27 +16,32 @@ export class AuthResolver {
 
   //
   //
-  @Mutation(() => SmsToken)
-  startSMSAuth(
+  @Mutation(() => SmsToken, { description: 'SMS 인증 요청' })
+  requestSMSAuth(
     @Args('phone') phone: string, //
   ) {
-    return this.authService.sendSMS(phone);
+    return this.authService.sendSmsAuthRequest(phone);
   }
 
   //
   //
-  @Mutation(() => SmsToken)
-  endSMSAuth(
+  @Mutation(() => SmsToken, { description: 'SMS 인증 검증' })
+  responseSMSAuth(
     @Args('phone') phone: string, //
     @Args('token') token: string,
   ) {
-    return this.authService.authSMS({ phone, token });
+    return this.authService.checkSmsAuthResponse({ phone, token });
+  }
+
+  @Query(() => SmsToken)
+  getSMSAuthLast() {
+    return this.authService.getLast();
   }
 
   //
   //
   @UseGuards(GqlAuthRefreshGuard)
-  @Mutation(() => String)
+  @Mutation(() => String, { description: 'Access Token 재발급' })
   restoreRefreshToken(
     @CurrentUser() currentUser: any, //
   ) {

@@ -11,3 +11,8 @@ function getToken(num) {
 
 getToken(6);
 getToken(4);
+
+console.log(true == 1);
+console.log(true === 1);
+console.log(true === false);
+console.log(true === true);
