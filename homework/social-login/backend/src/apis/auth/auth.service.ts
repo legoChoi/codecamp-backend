@@ -5,7 +5,7 @@ import * as authTool from 'src/common/tools/auth.tool';
 import 'dotenv/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SmsToken } from './entities/smsToken.entity';
-import { Repository } from 'typeorm';
+import { EntityNotFoundError, Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -17,14 +17,14 @@ export class AuthService {
     private readonly smsTokenRepository: Repository<SmsToken>,
   ) {}
 
-  getAccessToken({ user }) {
+  getAccessToken({ user }): String {
     return this.jwtService.sign(
       { userId: user.userId, sub: user.id }, // 데이터
       { secret: 'testAccessKey', expiresIn: '20s' }, // 옵션
     );
   }
 
-  setRefreshToken({ user, res }) {
+  setRefreshToken({ user, res }): void {
     const refreshToken = this.jwtService.sign(
       { userId: user.userId, sub: user.id },
       { secret: 'testRefreshKey', expiresIn: '2w' },
@@ -35,19 +35,25 @@ export class AuthService {
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
   }
 
-  async sendSmsAuthRequest(to: string) {
-    const token = authTool.getSmsToken(6);
-
+  async sendSmsAuthRequest(to: string): Promise<SmsToken> {
     //
     // 1. 유효한 검증 토큰 찾기
+    const validToken = await this.smsTokenRepository.findOne({
+      where: { isValid: true },
+    });
 
     //
-    // 2. 유효한 토큰 있으면 isValid false로 업데이트
+    // 1-1. 유효한 토큰 있으면 isValid false로 업데이트
+    if (validToken) {
+      const { id, ...rest } = validToken;
+      await this.smsTokenRepository.update({ id }, { isValid: false });
+    }
 
     //
-    // 3. 새로운 유효 검증 토큰 발급
+    // 2. 새로운 유효 검증 토큰 발급
+    const token = authTool.getSmsToken(6);
 
-    // authTool.sendSmsTokenToSMS(to, token);
+    // authTool.sendSmsTokenToSMS(to, token); // SMS 발송 API 호출
 
     return await this.smsTokenRepository.save({
       phone: to,
@@ -55,56 +61,45 @@ export class AuthService {
     });
   }
 
-  async getLast() {
-    const row = await this.smsTokenRepository.findOne({
-      where: { phone: '01051275208', isValid: true },
+  //
+  // TODO: Error 처리
+  async getLast({ phone }): Promise<SmsToken> {
+    return await this.smsTokenRepository
+      .createQueryBuilder('sms_token')
+      .select('*')
+      .where('sms_token.phone = :phone', { phone })
+      .andWhere('sms_token.isValid = :isValid', { isValid: true })
+      .getRawOne();
+
+    return await this.smsTokenRepository.findOne({
+      where: { phone, isValid: true },
     });
-
-    // console.log(tmp.isValid);
-    // console.log(`${tmp.isValid}와 true 비교: ${tmp.isValid === true}`);
-    // console.log(`${tmp.isValid}와 false 비교: ${tmp.isValid === false}`);
-
-    return row;
   }
 
-  // TODO:
-  async checkSmsAuthResponse({ phone, token }) {
+  //
+  // SMS 검증 : 토큰 비교
+  async checkSmsAuthResponse({ phone, token }): Promise<SmsToken> {
     //
     // 1. 유효한 검증 토큰 찾기
-    const row = await this.smsTokenRepository.findOne({
+    const data = await this.smsTokenRepository.findOne({
       where: { phone, isValid: true },
     });
 
-    //
-    // 2. 유효한 토큰 있으면 isValid false로 업데이트
+    console.log(data);
 
     //
-    // 3. 새로운 유효 검증 토큰 발급
+    // 2. 토큰 비교 : 토큰 검증 성공 시 데이터 update
+    if (data.token == token) {
+      data.isAuth = true;
+      data.isValid = false;
 
-    //
-    // 2. 토큰 비교
-    // 2-1. 토큰 검증 성공
-    if (row.token == token) {
-    } //
-    else {
-      // 2-2. 토큰 검증 실패
-      const result = false;
+      await this.smsTokenRepository.save(data);
     }
 
-    await this.smsTokenRepository
-      .createQueryBuilder()
-      .update()
-      .set({ isAuth: true })
-      .where('phone = :phone', { phone })
-      .andWhere('tokne = :token', { token })
-      .andWhere('isValid = :isValid', { isValid: 1 })
-      .returning('*')
-      .execute();
-
-    return row;
+    return data;
   }
 
-  async loginOAuth({ req, res }) {
+  async loginOAuth({ req, res }): Promise<void> {
     console.log(req.user);
 
     // 1. 가입 확인
@@ -125,6 +120,7 @@ export class AuthService {
   /*
     소셜 로그인 로직
     1. 소셜 로그인
+    
 
     2. sms 인증
 

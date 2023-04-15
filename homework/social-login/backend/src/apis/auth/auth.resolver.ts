@@ -34,8 +34,10 @@ export class AuthResolver {
   }
 
   @Query(() => SmsToken)
-  getSMSAuthLast() {
-    return this.authService.getLast();
+  fetchSMSAuthLast(
+    @Args('phone') phone: string, //
+  ) {
+    return this.authService.getLast({ phone });
   }
 
   //
