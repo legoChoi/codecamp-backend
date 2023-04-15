@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './apis/auth/auth.module';
 import { UserModule } from './apis/user/user.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [

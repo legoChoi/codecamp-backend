@@ -12,7 +12,7 @@ type SmsToken {
 
 type Query {
   fetchUser: String!
-  getSMSAuthLast: SmsToken!
+  fetchSMSAuthLast(phone: String!): SmsToken!
 }
 
 type Mutation {
