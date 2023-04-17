@@ -1,5 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('sms_token')
 @ObjectType()
@@ -23,4 +28,8 @@ export class SmsToken {
   @Column({ comment: '유효 상태', default: true })
   @Field(() => Boolean)
   isValid: boolean;
+
+  @CreateDateColumn({ comment: '생성 날짜' })
+  @Field(() => Date)
+  createdAt: Date;
 }

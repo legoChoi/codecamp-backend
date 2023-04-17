@@ -20,7 +20,7 @@ export class AuthResolver {
   requestSMSAuth(
     @Args('phone') phone: string, //
   ) {
-    return this.authService.sendSmsAuthRequest(phone);
+    return this.authService.requestSmsAuth(phone);
   }
 
   //
@@ -30,7 +30,7 @@ export class AuthResolver {
     @Args('phone') phone: string, //
     @Args('token') token: string,
   ) {
-    return this.authService.checkSmsAuthResponse({ phone, token });
+    return this.authService.responseSmsAuth({ phone, token });
   }
 
   @Query(() => SmsToken)
