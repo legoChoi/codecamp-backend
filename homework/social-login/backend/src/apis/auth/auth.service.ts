@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SmsToken } from './entities/smsToken.entity';
 import { EntityNotFoundError, Repository } from 'typeorm';
+import { interval } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +36,7 @@ export class AuthService {
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
   }
 
-  async sendSmsAuthRequest(to: string): Promise<SmsToken> {
+  async requestSmsAuth(to: string): Promise<SmsToken> {
     //
     // 1. 유효한 검증 토큰 찾기
     const validToken = await this.smsTokenRepository.findOne({
@@ -78,7 +79,7 @@ export class AuthService {
 
   //
   // SMS 검증 : 토큰 비교
-  async checkSmsAuthResponse({ phone, token }): Promise<SmsToken> {
+  async responseSmsAuth({ phone, token }): Promise<SmsToken> {
     //
     // 1. 유효한 검증 토큰 찾기
     const data = await this.smsTokenRepository.findOne({

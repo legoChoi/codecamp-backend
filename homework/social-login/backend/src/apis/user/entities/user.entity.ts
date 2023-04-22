@@ -56,6 +56,14 @@ export class User {
   @Field(() => Int)
   social_type: number;
 
+  @Column({
+    type: Boolean,
+    comment: '회원가입 추가정보 입력 완료',
+    default: false,
+  })
+  @Field(() => Boolean)
+  isCompleted: boolean;
+
   @CreateDateColumn({ comment: '생성일' })
   createdAt: Date;
 
